@@ -1,0 +1,7 @@
+# Private keys or other files that should be mantained in the local
+# machine without tracking them.
+key
+
+# Other secrets and environment variables for the program that should
+# be exclusive to the local machine.
+.env
