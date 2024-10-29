@@ -5,3 +5,6 @@ key
 # Other secrets and environment variables for the program that should
 # be exclusive to the local machine.
 .env
+
+# Python virtual environment for the project. Contains local dependencies
+.venv
