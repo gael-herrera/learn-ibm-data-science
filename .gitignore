@@ -8,3 +8,5 @@ key
 
 # Python virtual environment for the project. Contains local dependencies
 .venv
+
+.DS_Store
