@@ -59,6 +59,19 @@ mkdir -p "$dir"
 ssh-keygen -t ed25519 -C "$email" -f "$dir/$key_filename" -N "$passphrase" >/dev/null 2>&1
 echo -e "$config_content" >>"$dir/$config_filename"
 git config core.sshCommand "ssh -F $dir/$config_filename"
+git config user.email $email
+
+current_remote_url=$(git remote get-url origin 2>/dev/null)
+
+if [[ "$current_remote_url" == https://github.com/* ]]; then
+    repo_path=${current_remote_url#https://github.com/}
+    ssh_url="git@github.com:$repo_path"
+
+    git remote set-url origin "$ssh_url"
+    echo "[INFO]: Remote URL converted from HTTPS to SSH: $ssh_url"
+else
+    echo "[WARN]: Remote URL is already using SSH or no remote URL set."
+fi
 
 echo
 echo "[INFO]: SSH key generated and Git configured to use it."
